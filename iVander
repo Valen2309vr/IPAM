@@ -1,0 +1,23 @@
+function [coef] = iVander(x,y)
+
+N=length(x); 
+V=zeros(N);
+for c=1:N 
+   V(:,c)=x.^(c-1);         
+end                 
+
+coef = V\y;
+
+coef=flip(coef); 
+
+xp = linspace(x(1),x(end));
+yp = polyval(coef, xp); 
+
+figure(1)
+plot(xp,yp,'-k')
+hold on
+plot(x,y,'or','MarkerFaceColor','r') 
+xlabel 'X', ylabel 'Y', grid on
+legend('Polinomio interpolante','Datos')
+title('M�todo de Vandermonde')
+end
